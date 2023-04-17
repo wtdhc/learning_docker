@@ -1,0 +1,11 @@
+spring:
+  application.name: my-service
+
+info:
+  component: My-Service
+  artifact: my-service
+  version: 1.0.0
+
+server:
+  contextPath: /
+  port: 8082

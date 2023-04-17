@@ -1,0 +1,6 @@
+.dockerignore
+.gitignore
+*.DS_Store
+target/
+*.iml
+src/main/docker/
