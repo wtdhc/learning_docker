@@ -1,0 +1,93 @@
+docker run -d --tty --init --privileged `
+             -p 3310:3306 `
+             --expose 3310 `
+             --network build_backend `
+             --hostname servicetwodb `
+             --name service-two-db `
+             --env MYSQL_ROOT_PASSWORD=root123 `
+             --env MYSQL_DATABASE=service-two `
+             --env MYSQL_USER=service-two `
+             --env MYSQL_PASSWORD=service-two `
+             mysql/mysql-server:5.7
+
+ 
+
+docker run -d --tty --init --privileged `
+             -p 27017:27017 `
+             --expose 27017 `
+             --network build_backend `
+             --hostname serviceonedb `
+             --name service-one-db `
+             --env MONGODB_USER="service-one" `
+             --env MONGODB_PASS="service-one" `
+             --env MONGO_DATA_DIR=/data/db `
+             --env MONGO_LOG_DIR=/dev/null `
+             --volume build_mongodata:/data/db `
+             mongo:3.7 mongod --smallfiles
+
+ 
+
+$ docker run -d --tty --init --privileged `
+             -p 80:4200 `
+             --network build_frontend `
+             --name web-application `
+             --volume dist:/usr/share/nginx/html `
+             build_web-application
+
+ 
+
+docker run -d --tty --init --privileged `
+             -p 8500:8500 `
+             -p 8600:8600 `
+             --network build_backend `
+             --hostname consul `
+             --name consul `
+             --volume data:/consul/data `
+             consul:1.7.3 agent -server -client 0.0.0.0 -ui -bootstrap-expect=1 -data-dir=consul/data -datacenter=blr
+
+ 
+
+$ docker run -d --tty --init --privileged `
+             -p 5672:5672 `
+             -p 15672:15672 `
+             --expose 15672 `
+             --network build_backend `
+             --hostname rabbit `
+             --name rabbit-mq `
+             --env CLUSTERED=true `
+             --env RAM_NODE=true `
+             --env CLUSTER_WITH=rabbit `
+             --env RABBITMQ_DEFAULT_USER=docker `
+             --env RABBITMQ_DEFAULT_PASS=docker `
+             rabbitmq:3.8-management-alpine
+
+ 
+
+docker run -d --tty --init --privileged `
+             -p 8080:8080 `
+             --expose 8080 `
+             --network build_backend `
+             --hostname api-gateway `
+             --name api-gateway `
+             --env SPRING_PROFILES_ACTIVE=docker `
+             build_api-gateway
+
+ 
+
+$ docker run -d --tty --init --privileged `
+             -p 8084:8084 `
+             --network build_backend `
+             --hostname service-two `
+             --name service-two `
+             --env SPRING_PROFILES_ACTIVE=docker `
+             build_service-two
+
+ 
+
+docker run -d --tty --init --privileged `
+             -p 8082:8082 `
+             --network build_backend `
+             --hostname service-one `
+             --name service-one `
+             --env SPRING_PROFILES_ACTIVE=docker `
+             build_service-one

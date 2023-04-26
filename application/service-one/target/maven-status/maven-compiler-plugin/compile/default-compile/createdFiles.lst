@@ -1,0 +1,13 @@
+com\github\one\model\NameValueTO.class
+com\github\one\controller\NameValueController.class
+com\github\one\service\impl\ServiceOneRabbitMessageConsumer.class
+com\github\one\domain\NameValue.class
+com\github\one\component\queue\ServiceOneRabbitMQBean.class
+com\github\one\component\ScheduledTask.class
+com\github\one\service\impl\NameValueServiceImpl.class
+com\github\one\ServiceOneApplication.class
+com\github\one\config\ReactiveMongoConfiguration.class
+com\github\one\dao\NameValueRepository.class
+com\github\one\service\impl\ServiceOneRabbitMessageProducer.class
+com\github\one\service\NameValueService.class
+com\github\one\config\SwaggerConfig.class
